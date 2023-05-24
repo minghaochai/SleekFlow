@@ -1,0 +1,12 @@
+C:\Users\chaim6\source\repos\SleekFlow\Helper\bin\Debug\net6.0\Helper.deps.json
+C:\Users\chaim6\source\repos\SleekFlow\Helper\bin\Debug\net6.0\Helper.dll
+C:\Users\chaim6\source\repos\SleekFlow\Helper\bin\Debug\net6.0\Helper.pdb
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.csproj.AssemblyReference.cache
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.AssemblyInfoInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.AssemblyInfo.cs
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.csproj.CoreCompileInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.dll
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\refint\Helper.dll
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\Helper.pdb
+C:\Users\chaim6\source\repos\SleekFlow\Helper\obj\Debug\net6.0\ref\Helper.dll

@@ -1,0 +1,12 @@
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\bin\Debug\net6.0\SleekFlow.Domain.deps.json
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\bin\Debug\net6.0\SleekFlow.Domain.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\bin\Debug\net6.0\SleekFlow.Domain.pdb
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.csproj.AssemblyReference.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.AssemblyInfoInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.AssemblyInfo.cs
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.csproj.CoreCompileInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\refint\SleekFlow.Domain.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\SleekFlow.Domain.pdb
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Domain\obj\Debug\net6.0\ref\SleekFlow.Domain.dll

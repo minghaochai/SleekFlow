@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9Kt58vEuzmIS0w0JmJp6XyPwh5g0Bdopb5zdpg4Shubec5QqSlEr0NjiMNTdS8HYwq7u+JAI0J1FQ6VCvtn99Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\chaim6\\source\\repos\\SleekFlow\\Helper\\Helper.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chaim6\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

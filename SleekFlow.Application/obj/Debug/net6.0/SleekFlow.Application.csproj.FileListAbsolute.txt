@@ -1,0 +1,17 @@
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\SleekFlow.Application.deps.json
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\SleekFlow.Application.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\SleekFlow.Application.pdb
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.csproj.AssemblyReference.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.AssemblyInfoInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.AssemblyInfo.cs
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.csproj.CoreCompileInputs.cache
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\refint\SleekFlow.Application.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.pdb
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\ref\SleekFlow.Application.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\SleekFlow.Domain.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\SleekFlow.Domain.pdb
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\obj\Debug\net6.0\SleekFlow.Application.csproj.CopyComplete
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\Helper.dll
+C:\Users\chaim6\source\repos\SleekFlow\SleekFlow.Application\bin\Debug\net6.0\Helper.pdb
