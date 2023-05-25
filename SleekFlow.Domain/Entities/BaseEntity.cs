@@ -7,18 +7,18 @@ namespace SleekFlow.Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; } = string.Empty;
+        public int Id { get; set; }
 
         [Column(TypeName = "DATETIME")]
-        public DateTime AddAt { get; set; }
+        public DateTime AddAt { get; set; } = DateTime.UtcNow;
 
         [Column(TypeName = "NVARCHAR(100)")]
         public string AddBy { get; set; } = string.Empty;
 
         [Column(TypeName = "DATETIME")]
-        public DateTime EditAt { get; set; }
+        public DateTime? EditAt { get; set; }
 
         [Column(TypeName = "NVARCHAR(100)")]
-        public string EditBy { get; set; } = string.Empty;
+        public string? EditBy { get; set; }
     }
 }

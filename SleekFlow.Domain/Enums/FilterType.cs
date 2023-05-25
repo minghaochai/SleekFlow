@@ -8,6 +8,7 @@ namespace SleekFlow.Domain.Enums
 {
     public enum FilterType
     {
+        Equal,
         RangeStart,
         RangeEnd,
     }

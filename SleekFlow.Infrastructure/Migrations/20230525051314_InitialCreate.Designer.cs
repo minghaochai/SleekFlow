@@ -12,7 +12,7 @@ using SleekFlow.Infrastructure;
 namespace SleekFlow.Infrastructure.Migrations
 {
     [DbContext(typeof(SleekFlowDbContext))]
-    [Migration("20230524071512_InitialCreate")]
+    [Migration("20230525051314_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,12 +27,14 @@ namespace SleekFlow.Infrastructure.Migrations
 
             modelBuilder.Entity("SleekFlow.Domain.Entities.ToDo", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddAt")
-                        .HasColumnType("DATETIME");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("AddBy")
                         .IsRequired()
@@ -43,13 +45,12 @@ namespace SleekFlow.Infrastructure.Migrations
                         .HasColumnType("NVARCHAR(100)");
 
                     b.Property<DateTime>("DueAt")
-                        .HasColumnType("DATETIME");
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EditAt")
-                        .HasColumnType("DATETIME");
+                    b.Property<DateTime?>("EditAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EditBy")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(100)");
 
                     b.Property<string>("Name")

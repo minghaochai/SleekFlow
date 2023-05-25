@@ -22,5 +22,20 @@ namespace SleekFlow.Infrastructure
         {
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ToDo>()
+                .Property(p => p.DueAt)
+                .HasColumnType("datetime2");
+
+            modelBuilder.Entity<ToDo>()
+                .Property(p => p.AddAt)
+                .HasColumnType("datetime2");
+
+            modelBuilder.Entity<ToDo>()
+                .Property(p => p.EditAt)
+                .HasColumnType("datetime2");
+        }
     }
 }
