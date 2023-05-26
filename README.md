@@ -1,38 +1,19 @@
 # SleekFlow
 
-
-## Local Development
-
 #### Required
 
 - Visual Studio 2022
-- Docker Desktop or MongoDB Server
-- Any MongoDB Client (Robo3T, Compass and etc)
+- A SQL server database
 
-#### How to start
+#### How to start local development
+- Clone the git repository
+- Open the 'SleekFlow' solution in Visual Studio
+- Change the 'SleekFlowDbConnection' connection string property in the 'appsettings.json' and 'appsettings.Development.json' to point to your SQL server database
+- Open the Package manager console and set 'SleekFlow.Infrastructure' as the default project within the console
+- Run the command 'update-database' which tells EntityFramework Core to apply the migrations (The migrations include setting up the database and seeding the tables with data).
+- Ensure 'SleekFlow.Api' project is set as the start up project
+- Run the solution
 
-**NOTE:** Skip the rest if using MongoDB Server locally (Not docker)
-
-- Run Docker Desktop
-- Go the working folder **mapshare-backend/src**
-- Run the following command in Git Bash with current directory as above
-> sh start-docker.sh
-- This will pickup docker-compose.yml and start a MongoDB instance in your local machine, it will take some times
-- Add the following to **C:\Windows\System32\drivers\etc\hosts**, this is required to use connection string for replicaset
-> 127.0.0.1 mapsharemongo
-- Open Visual Studio 2022 and start the development
-
-**NOTE:** Use the Connection Information below for MongoDB Server in Docker container
-
-> ##### Connection information
-> - Server: mapsharemongo
-> - Port: 27017
-> - username: user
-> - password: password
-> - Authentication Mode: Basic(SCRAM-SHA-1)
-> - AuthenticationDB: mapshare
-
-
-**NOTE:** Default username and password are set in **mapshare-backend/src/init-local-mongo.js**
-
-**NOTE:** Please use the default username and password for MongoDB
+#### How to run the test cases
+- Open the 'SleekFlow' solution in Visual Studio
+- Right click on the 'SleekFlow.Test' project and select 'Run Tests'
