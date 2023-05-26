@@ -60,10 +60,10 @@ namespace SleekFlow.Application.Features.ToDos
             var toDo = _mapper.Map<ToDo>(request);
             toDo.EditAt = DateTime.UtcNow;
             toDo.EditBy = user;
-            await _toDoRepository.Update(toDo);
             toDo.Id = data.Id;
             toDo.AddAt = data.AddAt;
             toDo.AddBy = data.AddBy;
+            await _toDoRepository.Update(toDo);
             return _mapper.Map<ToDoResponse>(toDo);
         }
 
