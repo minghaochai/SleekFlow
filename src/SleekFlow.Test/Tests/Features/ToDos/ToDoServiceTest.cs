@@ -6,7 +6,6 @@ using SleekFlow.Domain.Entities;
 using SleekFlow.Domain.Enums;
 using SleekFlow.Domain.Filters;
 using SleekFlow.Domain.Interfaces;
-using SleekFlow.Infrastructure;
 using SleekFlow.Test.Core;
 using Xunit;
 
