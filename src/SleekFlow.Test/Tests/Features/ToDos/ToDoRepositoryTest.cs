@@ -4,26 +4,18 @@ using SleekFlow.Domain.Enums;
 using SleekFlow.Domain.Filters;
 using SleekFlow.Infrastructure;
 using SleekFlow.Infrastructure.Repositories;
+using SleekFlow.Test.Core;
 using Xunit;
 
 namespace SleekFlow.Test.Tests.Features.ToDos
 {
-    public class ToDoRepositoryTest
+    public class ToDoRepositoryTest : TestBase
     {
-        private readonly DbContextOptions<SleekFlowDbContext> dbContextOptions;
-
-        public ToDoRepositoryTest()
-        {
-            dbContextOptions = new DbContextOptionsBuilder<SleekFlowDbContext>()
-                .UseInMemoryDatabase("SleekFlow")
-                .Options;
-        }
-
         [Fact]
         public async Task GetById_Id1_ReturnRecord()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var entity = await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -50,7 +42,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetById_Id2_ReturnNull()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var toDoRepository = new ToDoRepository(sleekFlowDbContext);
@@ -72,7 +64,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Insert_NewToDo_ReturnSuccess()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var toDoRepository = new ToDoRepository(sleekFlowDbContext);
@@ -105,7 +97,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Insert_ExistingToDo_ReturnFail()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var entity = await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -142,7 +134,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Delete_ExistingToDo_ReturnSuccess()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var entity = await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -175,7 +167,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Delete_NonExistentToDo_ReturnFail()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var toDoRepository = new ToDoRepository(sleekFlowDbContext);
@@ -203,7 +195,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Update_ExistingToDo_ReturnSuccess()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var entity = await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -247,7 +239,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task Update_NonExistentToDo_ReturnFail()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 var toDoRepository = new ToDoRepository(sleekFlowDbContext);
@@ -283,7 +275,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_DateRangeBetweenParam_ReturnValidRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -318,7 +310,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_StatusInProgress_ReturnValidRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.InProgress, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -353,7 +345,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_InvalidDateRangeBetween_ReturnValidRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.InProgress, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -388,7 +380,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_InvalidStatus_ReturnValidRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.InProgress, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -423,7 +415,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_SortByAddAtDateDescending_ReturnValidSort()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -458,7 +450,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_SortByDueAtAscending_ReturnValidSort()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -492,7 +484,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_SortByNameDescending_ReturnValidSort()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -526,7 +518,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_SortByStatusAscending_ReturnValidSort()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -560,7 +552,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_Page2_ReturnValidRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -592,7 +584,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
         public async Task GetPageList_Page0_ReturnAllRecords()
         {
             // Arrange
-            using (var sleekFlowDbContext = new SleekFlowDbContext(dbContextOptions))
+            using (var sleekFlowDbContext = new SleekFlowDbContext(DbContextOptions))
             {
                 ResetDatabase(sleekFlowDbContext);
                 await sleekFlowDbContext.ToDos.AddAsync(new ToDo { Id = 1, Name = "Clean", Description = "Place clothes in washing machine", DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc), Status = Status.NotStarted, AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc), AddBy = "System" });
@@ -617,12 +609,6 @@ namespace SleekFlow.Test.Tests.Features.ToDos
                     Assert.NotNull(toDoRepository);
                 }
             }
-        }
-
-        private void ResetDatabase(SleekFlowDbContext sleekFlowDbContext)
-        {
-            sleekFlowDbContext.Database.EnsureDeleted();
-            sleekFlowDbContext.Database.EnsureCreated();
         }
     }
 }
