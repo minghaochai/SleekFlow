@@ -25,10 +25,4 @@
     <ProjectReference Include="..\SleekFlow.Infrastructure\SleekFlow.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
