@@ -28,6 +28,10 @@ namespace SleekFlow.Infrastructure
             }
         }
 
+        // Determine if the source expression already includes an OrderBy or ThenBy method chain.
+        // If it already includes an OrderBy or ThenBy method chain, the method to be used will be 'ThenBy' else 'Orderby'.
+        // Construct an expression to sort the incoming 'column' based on the previous statement result('ThenBy' or 'Orderby')
+        // Lastly replace the previous query with the expression.
         public static IQueryable<T> Sort<T>(this IQueryable<T> source, string column, string direction)
         {
             if (column != null)
@@ -77,6 +81,9 @@ namespace SleekFlow.Infrastructure
             return source.Skip(itemsToSkip).Take(itemsPerPage);
         }
 
+        // Retrieve the available filter properties from the 'filter' argument.
+        // Then for each filter property, determine the property name and filter method (equal or range) and generate the appropriate expression.
+        // Lastly combine the expressions and return the result.
         public static Expression<Func<T, bool>> ToFilterExpression<T>(this BaseFilter filter)
             where T : BaseEntity
         {
@@ -91,7 +98,6 @@ namespace SleekFlow.Infrastructure
             if (filterProperties.Any())
             {
                 List<Expression> columnFilterExpressions = new();
-                List<Expression> wildSearchOnColumnExpressions = new();
                 foreach (var filterProperty in filterProperties)
                 {
                     var fieldAttribute = filterProperty.GetCustomAttribute<FieldAttribute>();

@@ -3,6 +3,8 @@ using System.Reflection;
 
 namespace Helper.DependencyInjection
 {
+    // Gets all classes that implement an interface whose type is within the serviceType array.
+    // Then loop through the classes and find a matching interface name (e.g.match ToDoRepository with IToDoRepository) or use the generic interface for dependency injection.
     public static class DependencyInjection
     {
         public static void RegisterAllDependencies(this IServiceCollection services, Type[] serviceType, Assembly assembly)
