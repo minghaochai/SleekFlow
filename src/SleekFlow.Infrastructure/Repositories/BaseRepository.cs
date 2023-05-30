@@ -32,7 +32,8 @@ namespace SleekFlow.Infrastructure.Repositories
                 .Page(filter.PageNumber, filter.ItemsPerPage)
                 .AsNoTracking()
                 .ToListAsync();
-            return (result, result.Count);
+            var count = await DbSet.Filter(filterExp).AsNoTracking().CountAsync();
+            return (result, count);
         }
 
         public async virtual Task<int> Insert(T entity)
