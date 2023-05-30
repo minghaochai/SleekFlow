@@ -1,3 +1,4 @@
+using SleekFlow.Api.Extensions.Cors;
 using SleekFlow.Api.Extensions.Exception;
 using SleekFlow.Application;
 using SleekFlow.Infrastructure;
@@ -11,6 +12,7 @@ namespace SleekFlow
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.ConfigureCors(builder.Configuration);
             // Add services to the container.
             builder.Services.AddInfrastructures(builder.Configuration);
             builder.Services.AddServices();
@@ -31,6 +33,8 @@ namespace SleekFlow
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors();
             app.UseException();
             app.UseHttpsRedirection();
             app.UseAuthorization();
