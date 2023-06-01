@@ -23,7 +23,7 @@ namespace SleekFlow.IntegrationTest.Tests.Features.ToDos
                 Name = "Clean",
                 Description = "Place clothes in washing machine",
                 DueAt = new DateTime(2023, 5, 27, 0, 0, 0, DateTimeKind.Utc),
-                Status = Status.NotStarted,
+                Status = Status.InProgress,
                 AddAt = new DateTime(2023, 5, 25, 0, 0, 0, DateTimeKind.Utc),
                 AddBy = "System"
             },
@@ -272,6 +272,157 @@ namespace SleekFlow.IntegrationTest.Tests.Features.ToDos
 
             // Assert
             Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/todos", 1, 1)]
+        [InlineData("/todos", 1, 2)]
+        [InlineData("/todos", 1, 3)]
+        [InlineData("/todos", 2, 1)]
+        public async Task Get_PaginationQuery_EndpointsReturnSuccessAndRecord(string url, int pageNumber, int itemsPerPage)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber={pageNumber}&ItemsPerPage={itemsPerPage}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(pageNumber, result.PageInfo.PageNumber);
+            Assert.Equal(itemsPerPage, result.PageInfo.ItemsPerPage);
+            Assert.Equal(3, result.PageInfo.TotalItems);
+            Assert.Equal(itemsPerPage, result.Data.Count);
+        }
+
+        [Theory]
+        [InlineData("/todos", 0, 2)]
+        [InlineData("/todos", 1, 1)]
+        public async Task Get_StatusFilterQuery_EndpointsReturnSuccessAndRecord(string url, int status, int expectedCount)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber=1&ItemsPerPage=5&Status={status}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(expectedCount, result.Data.Count);
+            Assert.Equal(status, (int)result.Data[0].Status!.Value);
+        }
+
+        [Theory]
+        [InlineData("/todos", "2023-05-26", "2023-05-27", 2)]
+        [InlineData("/todos", "2023-05-28", "2023-05-28", 1)]
+        [InlineData("/todos", "2023-10-27", "2023-10-28", 0)]
+        public async Task Get_DateRangeFilterQuery_EndpointsReturnSuccessAndRecord(string url, string startDate, string endDate, int expectedCount)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber=1&ItemsPerPage=5&DueAtStart={startDate}&DueAtEnd={endDate}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(expectedCount, result.Data.Count);
+        }
+
+        [Theory]
+        [InlineData("/todos", "asc", "Clean")]
+        [InlineData("/todos", "desc", "Iron")]
+        public async Task Get_SortByName_EndpointsReturnSuccessAndCorrectRecordSequence(string url, string sortDirection, string expectedName)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber=1&ItemsPerPage=5&SortColumn=Name&SortDirection={sortDirection}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(expectedName, result.Data[0].Name);
+        }
+
+        [Theory]
+        [InlineData("/todos", "asc", 0)]
+        [InlineData("/todos", "desc", 1)]
+        public async Task Get_SortByStatus_EndpointsReturnSuccessAndCorrectRecordSequence(string url, string sortDirection, int expectedStatus)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber=1&ItemsPerPage=5&SortColumn=Status&SortDirection={sortDirection}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(expectedStatus, (int)result.Data[0].Status!.Value);
+        }
+
+        [Theory]
+        [InlineData("/todos", "asc", "Clean")]
+        [InlineData("/todos", "desc", "Iron")]
+        public async Task Get_SortByDueAt_EndpointsReturnSuccessAndCorrectRecordSequence(string url, string sortDirection, string expectedName)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.ReinitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = $"?PageNumber=1&ItemsPerPage=5&SortColumn=DueAt&SortDirection={sortDirection}";
+
+            // Act
+            var response = await client.GetAsync($"{url}{urlParam}");
+            var result = response.CastToModel<PageResponse<ToDoResponse>>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(expectedName, result.Data[0].Name);
         }
     }
 }
