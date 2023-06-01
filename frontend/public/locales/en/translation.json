@@ -1,0 +1,19 @@
+{
+  "common": {
+    "success": "Success",
+    "error": "Error encountered",
+    "invalidInput": "Invalid input"
+  },
+  "toDo": {
+    "name": "Name",
+    "description": "Description",
+    "dueAt": "Due At",
+    "status": "Status",
+    "cancelEdit": "Cancel",
+    "edit": "Update",
+    "add": "Add To   Do",
+    "dueAtFrom": "Due At From",
+    "dueAtBefore": "Due At Before",
+    "applyFilter": "Apply Filters"
+  }
+}
