@@ -139,7 +139,6 @@ namespace SleekFlow.IntegrationTest.Tests.Features.ToDos
             var urlParam = "?user=Test";
             // Act
             var response = await client.PostAsync($"{url}{urlParam}", new ToDo() { }.CastToHttpContent());
-            var result = response.CastToModel<ToDoResponse>();
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -196,6 +195,83 @@ namespace SleekFlow.IntegrationTest.Tests.Features.ToDos
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             Assert.Equal("To do not found", result.Errors![0].Message);
+        }
+
+        [Theory]
+        [InlineData("/todos/1")]
+        public async Task Update_InvalidToDo_EndpointsReturnBadRequest(string url)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.DropAndRecreateDb(db);
+            }
+            var client = _factory.CreateClient();
+            var urlParam = "?user=Test";
+            // Act
+            var response = await client.PutAsync($"{url}{urlParam}", new ToDo() { }.CastToHttpContent());
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/todos/1")]
+        public async Task Delete_ToDoExists_EndpointsReturnSuccess(string url)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.DropAndRecreateDb(db);
+                Utilities<ToDo>.InitializeDb(db, _seedingData, _tableName);
+            }
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.DeleteAsync(url);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/todos/1")]
+        public async Task Delete_ToDoDoesNotExist_EndpointsReturnNotFoundAndErrorResponse(string url)
+        {
+            // Arrange
+            using (var scope = _factory.Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SleekFlowDbContext>();
+                Utilities<ToDo>.DropAndRecreateDb(db);
+            }
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.DeleteAsync(url);
+            var result = response.CastToModel<ErrorResponse>();
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.Equal("To do not found", result.Errors![0].Message);
+        }
+
+        [Theory]
+        [InlineData("/todos")]
+        public async Task Delete_IncorrectParam_EndpointsReturnMethodNotAllowed(string url)
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.DeleteAsync(url);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
         }
     }
 }
