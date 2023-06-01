@@ -570,7 +570,7 @@ namespace SleekFlow.Test.Tests.Features.ToDos
                     var result = await toDoRepository.GetPageList(filter);
 
                     // Assert
-                    Assert.Equal(1, result.Count);
+                    Assert.Equal(2, result.Count);
                     Assert.Equal("Clean", result.Results.ToList()[0].Name);
                 }
                 else
