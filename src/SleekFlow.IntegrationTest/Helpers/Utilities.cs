@@ -20,7 +20,7 @@ namespace SleekFlow.IntegrationTest.Helpers
             }
         }
 
-        public static void DropTableRecords(SleekFlowDbContext db)
+        public static void DropAndRecreateDb(SleekFlowDbContext db)
         {
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
