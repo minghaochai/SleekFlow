@@ -55,7 +55,7 @@ namespace SleekFlow.Application.Features.ToDos
             var data = await _toDoRepository.GetById(id);
             if (data == null)
             {
-                throw new NotFoundException($"To do not found");
+                throw new NotFoundException("To do not found");
             }
             var toDo = _mapper.Map<ToDo>(request);
             toDo.EditAt = DateTime.UtcNow;
