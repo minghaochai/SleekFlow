@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Domain", "SleekFl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Infrastructure", "SleekFlow.Infrastructure\SleekFlow.Infrastructure.csproj", "{56BD9DD0-C2C8-4135-A2A4-25BF55C57695}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.Test", "SleekFlow.Test\SleekFlow.Test.csproj", "{FFE6192C-3182-4D53-A5FF-E073C834A99A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SleekFlow.UnitTest", "SleekFlow.Test\SleekFlow.UnitTest.csproj", "{FFE6192C-3182-4D53-A5FF-E073C834A99A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{3D9461BC-C930-4D9B-BC46-0DE1D1EA8A55}"
 EndProject
