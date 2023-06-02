@@ -34,5 +34,9 @@
 - In the .env file, change the 'REACT_APP_API_BASE_URL' property to point to the backend api url
 - Run "npm start" to start the client
 
+#### How to run the test cases
+- Open the 'frontend' folder with visual studio
+- Run "npm test"
+
 # DEMO
 - The demo.webm is a video file demonstrating the solution. It can be played with Windows Media Player or VLC media player
