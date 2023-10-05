@@ -38,7 +38,7 @@ const isCustomErrorResponse = (
 };
 
 export const rtkQueryErrorLogger: Middleware =
-  (api: MiddlewareAPI) => (next) => (action) => {
+  (_api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action) && isCustomErrorResponse(action.payload)) {
       const error = action.payload.data.errors[0]?.message
         ? action.payload.data.errors[0].message

@@ -1,6 +1,8 @@
 module.exports = {
-  endOfLine: "auto",
+  endOfLine: 'crlf',
   jsxSingleQuote: true,
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'none',
+  semi: true,
+  plugins: ['prettier-plugin-organize-imports'],
 };

@@ -15,7 +15,9 @@
     "outDir": "./build/",
     "resolveJsonModule": true,
     "strict": true,
-    "target": "es5"
+    "target": "es5",
+    "baseUrl": ".",
+    "types": ["@testing-library/jest-dom", "node"]
   },
   "include": ["./src/**/*"]
 }
